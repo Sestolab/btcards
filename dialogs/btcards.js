@@ -1,4 +1,6 @@
 CKEDITOR.dialog.add('btcards', function(editor){
+	var classStr = '';
+
 	return {
 		title: editor.lang.btcards.title,
 		minWidth: 450,
@@ -22,11 +24,8 @@ CKEDITOR.dialog.add('btcards', function(editor){
 									['100%', 'w-100'],
 									[editor.lang.btcards.auto, 'w-auto']
 								],
-								setup: function(widget){
-									this.setValue(widget.data.class.match(/\bw-(\d{2,3}|auto)\b/g) || '');
-								},
-								commit: function(widget){
-									widget.pushData('class', this.getValue(), /\s?\bw-(\d{2,3}|auto)\b/g);
+								setup: function(){
+									this.setValue(classStr.match(/\bw-(\d{2,3}|auto)\b/g) || '');
 								}
 							},
 							{
@@ -46,11 +45,8 @@ CKEDITOR.dialog.add('btcards', function(editor){
 									[editor.lang.btcards.white, 'bg-white'],
 									[editor.lang.btcards.transparent, 'bg-transparent']
 								],
-								setup: function(widget){
-									this.setValue(widget.data.class.match(/bg-\w+/) || '');
-								},
-								commit: function(widget){
-									widget.pushData('class', this.getValue(), /\s?bg-\w+/g);
+								setup: function(){
+									this.setValue(classStr.match(/bg-\w+/) || '');
 								}
 							},
 							{
@@ -69,11 +65,8 @@ CKEDITOR.dialog.add('btcards', function(editor){
 									[editor.lang.btcards.dark, 'border-dark'],
 									[editor.lang.btcards.white, 'border-white']
 								],
-								setup: function(widget){
-									this.setValue(widget.data.class.match(/border-\w+/) || '');
-								},
-								commit: function(widget){
-									widget.pushData('class', this.getValue(), /\s?border-\w+/g);
+								setup: function(){
+									this.setValue(classStr.match(/border-\w+/) || '');
 								}
 							},
 							{
@@ -96,11 +89,8 @@ CKEDITOR.dialog.add('btcards', function(editor){
 									[editor.lang.btcards.black50, 'text-black-50'],
 									[editor.lang.btcards.white50, 'text-white-50']
 								],
-								setup: function(widget){
-									this.setValue(widget.data.class.match(new RegExp(this.getValues().join('(?=\\s|$)|'), 'g') || ''));
-								},
-								commit: function(widget){
-									widget.pushData('class', this.getValue(), new RegExp('\\s?'+this.getValues().join('(?=\\s|$)|'), 'g'));
+								setup: function(){
+									this.setValue(classStr.match(new RegExp(this.getValues().join('(?=\\s|$)|'), 'g') || ''));
 								}
 							},
 							{
@@ -114,11 +104,8 @@ CKEDITOR.dialog.add('btcards', function(editor){
 									[editor.lang.btcards.center, 'text-center'],
 									[editor.lang.btcards.right, 'text-right']
 								],
-								setup: function(widget){
-									this.setValue(widget.data.class.match(/text-(left|center|right)/g) || '');
-								},
-								commit: function(widget){
-									widget.pushData('class', this.getValue(), /\s?text-(left|center|right)/);
+								setup: function(){
+									this.setValue(classStr.match(/text-(left|center|right)/g) || '');
 								}
 							}
 						]
@@ -147,12 +134,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['5', 'mt-5'],
 													[editor.lang.btcards.auto, 'mt-auto']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(my|mt)-([0-5]|auto)/g))
-														this.setValue(widget.data.class.match(/(my|mt)-([0-5]|auto)/g)[0].replace('my', 'mt'));
-												},
-												commit: function(widget){
-													widget.pushData('class', this.getValue(), /\s?mt-([0-5]|auto)/g);
+												setup: function(){
+													if (classStr.match(/(my|mt)-([0-5]|auto)/g))
+														this.setValue(classStr.match(/(my|mt)-([0-5]|auto)/g)[0].replace('my', 'mt'));
 												}
 											},
 											{
@@ -169,15 +153,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['5', 'mb-5'],
 													[editor.lang.btcards.auto, 'mb-auto']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(my|mb)-([0-5]|auto)/g))
-														this.setValue(widget.data.class.match(/(my|mb)-([0-5]|auto)/g)[0].replace('my', 'mb'));
-												},
-												commit: function(widget){
-													if(this.getValue().includes(this.getDialog().getValueOf('tab-basic', 'mt').match(/-./)))
-														widget.pushData('class', this.getValue().replace('mb', 'my'), /\s?(mt|my|mb)-([0-5]|auto)/g);
-													else
-														widget.pushData('class', this.getValue(), /\s?(my|mb)-([0-5]|auto)/g);
+												setup: function(){
+													if (classStr.match(/(my|mb)-([0-5]|auto)/g))
+														this.setValue(classStr.match(/(my|mb)-([0-5]|auto)/g)[0].replace('my', 'mb'));
 												}
 											},
 											{
@@ -194,12 +172,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['5', 'ml-5'],
 													[editor.lang.btcards.auto, 'ml-auto']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(mx|ml)-([0-5]|auto)/g))
-														this.setValue(widget.data.class.match(/(mx|ml)-([0-5]|auto)/g)[0].replace('mx', 'ml'));
-												},
-												commit: function(widget){
-													widget.pushData('class', this.getValue(), /\s?ml-([0-5]|auto)/g);
+												setup: function(){
+													if (classStr.match(/(mx|ml)-([0-5]|auto)/g))
+														this.setValue(classStr.match(/(mx|ml)-([0-5]|auto)/g)[0].replace('mx', 'ml'));
 												}
 											},
 											{
@@ -216,15 +191,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['5', 'mr-5'],
 													[editor.lang.btcards.auto, 'mr-auto']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(mx|mr)-([0-5]|auto)/g))
-														this.setValue(widget.data.class.match(/(mx|mr)-([0-5]|auto)/g)[0].replace('mx', 'mr'));
-												},
-												commit: function(widget){
-													if (this.getValue().includes(this.getDialog().getValueOf('tab-basic', 'ml').match(/-./)))
-														widget.pushData('class', this.getValue().replace('mr', 'mx'), /\s?(ml|mx|mr)-([0-5]|auto)/g);
-													else
-														widget.pushData('class', this.getValue(), /\s?(mx|mr)-([0-5]|auto)/g);
+												setup: function(){
+													if (classStr.match(/(mx|mr)-([0-5]|auto)/g))
+														this.setValue(classStr.match(/(mx|mr)-([0-5]|auto)/g)[0].replace('mx', 'mr'));
 												}
 											}
 										]
@@ -251,12 +220,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['4', 'pt-4'],
 													['5', 'pt-5']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(py|pt)-[0-5]/g))
-														this.setValue(widget.data.class.match(/(py|pt)-[0-5]/g)[0].replace('py', 'pt'));
-												},
-												commit: function(widget){
-													widget.pushData('class', this.getValue(), /\s?pt-[0-5]/g);
+												setup: function(){
+													if (classStr.match(/(py|pt)-[0-5]/g))
+														this.setValue(classStr.match(/(py|pt)-[0-5]/g)[0].replace('py', 'pt'));
 												}
 											},
 											{
@@ -272,15 +238,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['4', 'pb-4'],
 													['5', 'pb-5']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(py|pb)-[0-5]/g))
-														this.setValue(widget.data.class.match(/(py|pb)-[0-5]/g)[0].replace('py', 'pb'));
-												},
-												commit: function(widget){
-													if (this.getValue().includes(this.getDialog().getValueOf('tab-basic', 'pt').match(/-./)))
-														widget.pushData('class', this.getValue().replace('pb', 'py'), /\s?(pt|py|pb)-[0-5]/g);
-													else
-														widget.pushData('class', this.getValue(), /\s?(py|pb)-[0-5]/g);
+												setup: function(){
+													if (classStr.match(/(py|pb)-[0-5]/g))
+														this.setValue(classStr.match(/(py|pb)-[0-5]/g)[0].replace('py', 'pb'));
 												}
 											},
 											{
@@ -296,12 +256,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['4', 'pl-4'],
 													['5', 'pl-5']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(px|pl)-[0-5]/g))
-														this.setValue(widget.data.class.match(/(px|pl)-[0-5]/g)[0].replace('px', 'pl'));
-												},
-												commit: function(widget){
-													widget.pushData('class', this.getValue(), /\s?pl-[0-5]/g);
+												setup: function(){
+													if (classStr.match(/(px|pl)-[0-5]/g))
+														this.setValue(classStr.match(/(px|pl)-[0-5]/g)[0].replace('px', 'pl'));
 												}
 											},
 											{
@@ -317,15 +274,9 @@ CKEDITOR.dialog.add('btcards', function(editor){
 													['4', 'pr-4'],
 													['5', 'pr-5']
 												],
-												setup: function(widget){
-													if (widget.data.class.match(/(px|pr)-[0-5]/g))
-														this.setValue(widget.data.class.match(/(px|pr)-[0-5]/g)[0].replace('px', 'pr'));
-												},
-												commit: function(widget){
-													if (this.getValue().includes(this.getDialog().getValueOf('tab-basic', 'pl').match(/-./)))
-														widget.pushData('class', this.getValue().replace('pr', 'px'), /\s?(pl|px|pr)-[0-5]/g);
-													else
-														widget.pushData('class', this.getValue(), /\s?(px|pr)-[0-5]/g);
+												setup: function(){
+													if (classStr.match(/(px|pr)-[0-5]/g))
+														this.setValue(classStr.match(/(px|pr)-[0-5]/g)[0].replace('px', 'pr'));
 												}
 											}
 										]
@@ -347,6 +298,27 @@ CKEDITOR.dialog.add('btcards', function(editor){
 					}
 				]
 			}
-		]
+		],
+
+		onShow: function(){
+			classStr = CKEDITOR.tools.object.keys(this.widget.getClasses()).join(' ');
+		},
+		onOk: function(){
+			var classes = ['card'];
+
+			this.getElement().find('select').toArray().forEach(function(item){
+				var val = item.getValue(),
+					sChar = val.charAt(1),
+					invVal = val.replace(sChar, {r: 'l', b: 't'}[sChar]);
+
+				if (!val) return;
+
+				classes.includes(invVal)
+					? classes[classes.indexOf(invVal)] = val.replace(sChar, {r: 'x', b: 'y'}[sChar])
+					: classes.push(val);
+			});
+
+			this.widget.setData('classes', CKEDITOR.tools.convertArrayToObject(classes));
+		}
 	};
 });

@@ -37,11 +37,14 @@ CKEDITOR.plugins.add('btcards', {
 				return element.name == 'div' && element.hasClass('card');
 			},
 			init: function(){
-				this.setData({'style': this.element.getAttribute('style'), 'class': this.element.getAttribute('class')});
+				this.setData('style', this.element.getAttribute('style'));
+
+				this.on('dialog', function(e){
+					e.data.widget = this;
+				}, this);
 			},
 			data: function(){
 				this.data.style ? this.element.setAttribute('style', this.data.style) : this.element.removeAttribute('style');
-				this.element.setAttribute('class', this.data.class);
 			}
 		});
 
