@@ -4,24 +4,22 @@ CKEDITOR.plugins.add('btcards', {
 	icons: 'btcards',
 
 	init: function(editor){
+		var commandDefinition = {
+			exec: function(editor){
+				var c = this.name.replace(/.{4}/, '$&-'),
+					div = editor.document.createElement('div', {attributes: {class: c}}),
+					el = editor.widgets.getByElement(editor.getSelection().getStartElement()).element;
+
+				(c == 'card-body' && el.findOne('.card-footer')) ? div.insertBefore(el.getLast()) : el.append(div, c == 'card-header');
+			}
+		};
+
 		CKEDITOR.dialog.add('btcards', this.path + 'dialogs/btcards.js');
 
-		editor.addCommand('cardHeader', {
-			exec: function(){
-				cardElement(true).addClass('card-header');
-			}
-		});
-		editor.addCommand('cardBody', {
-			exec: function(editor){
-				var el = editor.widgets.getByElement(editor.getSelection().getStartElement()).element,
-					ch = editor.document.createElement('div').addClass('card-body');
-				el.findOne('.card-footer') ? ch.insertBefore(el.getLast()) : ch.appendTo(el);
-			}
-		});
-		editor.addCommand('cardFooter', {
-			exec: function(){
-				cardElement().addClass('card-footer');
-			}
+		editor.addCommands({
+			cardHeader: commandDefinition,
+			cardBody: commandDefinition,
+			cardFooter: commandDefinition
 		});
 
 		editor.widgets.add('btcards', {
@@ -82,10 +80,5 @@ CKEDITOR.plugins.add('btcards', {
 				else
 					return { cardBody: CKEDITOR.TRISTATE_OFF };
 		});
-
-		function cardElement(h){
-			return editor.widgets.getByElement(editor.getSelection().getStartElement()).element.append(editor.document.createElement('div'), h);
-		}
-
 	}
 });
