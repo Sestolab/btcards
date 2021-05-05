@@ -55,7 +55,7 @@ CKEDITOR.plugins.add('btcards', {
 				order: 1
 			},
 			cardBody: {
-				label: editor.lang.btcards.body,
+				label: editor.lang.btcards.cbody,
 				command: 'cardBody',
 				group: 'btcards',
 				order: 1

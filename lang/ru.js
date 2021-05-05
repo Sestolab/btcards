@@ -11,7 +11,7 @@ CKEDITOR.plugins.setLang('btcards', 'ru', {
 	dark: 'Темный',
 	white: 'Белый',
 	transparent: 'Прозрачный',
-	tbody: 'Основной',
+	body: 'Основной',
 	muted: 'Неяркий',
 	black50: 'Черный 50%',
 	white50: 'Белый 50%',
@@ -29,7 +29,7 @@ CKEDITOR.plugins.setLang('btcards', 'ru', {
 	top: 'Cверху',
 	bottom: 'Cнизу',
 	header: 'Заголовок карточки',
-	body: 'Тело карточки',
+	cbody: 'Тело карточки',
 	footer: 'Колонтитул карточки',
 	cstyle: 'Стиль карточки'
 });
